@@ -7,6 +7,9 @@ require "sidekiq/cron/web"
 
 Diaspora::Application.routes.draw do
 
+  root 'home#show'
+  #root 'users#sign_in'
+
   resources :report, :except => [:edit, :new]
 
   if Rails.env.production?
@@ -230,9 +233,6 @@ Diaspora::Application.routes.draw do
   # Relay
   get ".well-known/x-social-relay" => "social_relay#well_known"
 
-  # Startpage
-  root :to => 'home#show'
-
   api_version(module: "Api::V0", path: {value: "api/v0"}, default: true) do
     match "user", to: "users#show", via: %i(get post)
   end
@@ -256,4 +256,5 @@ Diaspora::Application.routes.draw do
 
   get ".well-known/webfinger", to: "api/openid_connect/discovery#webfinger"
   get ".well-known/openid-configuration", to: "api/openid_connect/discovery#configuration"
+
 end

@@ -1,7 +1,8 @@
-= t(".share_this")
-= invite_link(current_user.invitation_code)
-.invitations-link.btn.btn-link#invitations-button{"data-toggle" => "modal"}
-  = t(".by_email")
+= t('.share_this')
+= #invite_link(current_user.invitation_code)
+= text_field_tag :invite_code, 'http://social.ritfu.com/i/' + current_user.invitation_code.to_param.to_s, class: "form-control", readonly: true
+.btn-link{ 'data-toggle' => 'modal', 'data-target' => '#invitationsModal'}
+  = t('.by_email')
 
 = render "shared/modal",
     path: new_user_invitation_path,
