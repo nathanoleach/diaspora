@@ -7,6 +7,9 @@ require 'sidetiq/web'
 
 Diaspora::Application.routes.draw do
 
+  root 'home#show'
+  #root 'users#sign_in'
+
   resources :report, :except => [:edit, :new]
 
   if Rails.env.production?
@@ -231,5 +234,8 @@ Diaspora::Application.routes.draw do
   end
 
   # Startpage
-  root :to => 'home#show'
+  #root :to => 'home#show'
+  #root :to => 'users#sign_in'
+  #root :to => 'login'
+
 end

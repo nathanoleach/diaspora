@@ -1,6 +1,9 @@
 # configure the federation engine
 DiasporaFederation.configure do |config|
   # the pod url
+
+  #AppConfig.pod_uri.host = 'dankmaster32.noip.me'
+
   config.server_uri = AppConfig.pod_uri
 
   config.certificate_authorities = AppConfig.environment.certificate_authorities.get
