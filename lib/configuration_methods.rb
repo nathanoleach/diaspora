@@ -6,7 +6,6 @@ module Configuration
     def environment_url
       # NOL - change to alias url...in case you need to change 
       # invite links, etc, without resetting your entire DB
-      binding.pry
       case Rails.env
         when 'development'
           url = environment.development.alias_url
