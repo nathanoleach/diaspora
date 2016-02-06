@@ -26,8 +26,10 @@ module Diaspora
     end
 
     def self.url_eligible?(url)
+      # NOL - handle alias urls
+      env_url = environment_url
       return false unless url.start_with?('http', '//')
-      return false if url.start_with?(AppConfig.environment.url.to_s,
+      return false if url.start_with?(env_url, #AppConfig.environment.url.to_s,
                                       AppConfig.privacy.camo.root.to_s)
       true
     end

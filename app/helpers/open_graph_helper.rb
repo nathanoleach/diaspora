@@ -39,12 +39,20 @@ module OpenGraphHelper
   end
 
   def og_general_tags
+  
+    # NOL - handle alias urls
+    if AppConfig.environment[Rails.env]['alias_url']
+      temp_og_url = AppConfig.environment[Rails.env]['alias_url']
+    else
+      temp_og_url = AppConfig.environment.url
+    end  
+  
     [
       *og_common_tags,
       og_type,
       og_title('diaspora* social network'),
       og_image,
-      og_url(AppConfig.environment.url),
+      og_url(temp_og_url), # NOL - AppConfig.environment.url),
       og_description('diaspora* is the online social world where you are in control.')
     ].join("\n").html_safe
   end

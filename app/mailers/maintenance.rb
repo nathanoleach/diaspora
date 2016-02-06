@@ -4,7 +4,8 @@ class Maintenance < ActionMailer::Base
   def account_removal_warning(user)
     @user = user
     @login_url  = new_user_session_url
-    @pod_url = AppConfig.environment.url
+    # NOL - handle alias urls
+    @pod_url = environment_url #AppConfig.environment.url
     @after_days = AppConfig.settings.maintenance.remove_old_users.after_days.to_s
     @remove_after = @user.remove_after
 

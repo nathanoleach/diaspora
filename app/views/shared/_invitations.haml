@@ -1,6 +1,7 @@
 = t('.share_this')
-= #invite_link(current_user.invitation_code)
-= text_field_tag :invite_code, 'http://social.ritfu.com/i/' + current_user.invitation_code.to_param.to_s, class: "form-control", readonly: true
+= invite_link(current_user.invitation_code)
+= #NOL - probably no longer needed with update to lib/configuration_methods.rb
+= #text_field_tag :invite_code, 'http://social.ritfu.com/i/' + current_user.invitation_code.to_param.to_s, class: "form-control", readonly: true
 .btn-link{ 'data-toggle' => 'modal', 'data-target' => '#invitationsModal'}
   = t('.by_email')
 

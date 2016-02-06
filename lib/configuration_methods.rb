@@ -2,10 +2,30 @@ module Configuration
   KNOWN_SERVICES = [:twitter, :tumblr, :facebook, :wordpress].freeze
 
   module Methods
+  
+    def environment_url
+      # NOL - change to alias url...in case you need to change 
+      # invite links, etc, without resetting your entire DB
+      binding.pry
+      case Rails.env
+        when 'development'
+          url = environment.development.alias_url
+        when 'production'
+          url = environment.production.alias_url
+        else
+          url = environment[Rails.env]['alias_url']
+      end
+    rescue
+      url = environment.url.get
+    end      
+  
     def pod_uri
       return @pod_uri.dup unless @pod_uri.nil?
 
-      url = environment.url.get
+      # NOL - change to alias url...in case you need to change 
+      # invite links, etc, without resetting your entire DB
+      #url = environment.url.get
+      url = environment_url
       url = "http://#{url}" unless url =~ /^(https?:\/\/)/
       url << "/" unless url.end_with?("/")
 

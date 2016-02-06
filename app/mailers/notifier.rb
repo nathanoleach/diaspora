@@ -28,7 +28,9 @@ class Notifier < ActionMailer::Base
 
     default_opts = {:to => @receiver.email,
          :from => AppConfig.mail.sender_address,
-         :subject => subject, :host => 'social.ritfu.com'} #:host => AppConfig.pod_uri.host}
+         :subject => subject, :host => AppConfig.pod_uri.host}
+         #NOL - probably no longer needed with update to lib/configuration_methods.rb
+         #:subject => subject, :host => 'social.ritfu.com'} #:host => AppConfig.pod_uri.host}
     default_opts.merge!(opts)
 
     mail(default_opts) do |format|

@@ -81,9 +81,19 @@ class StatusMessageCreationService
   end
 
   def dispatch_status_message(user)
+  
+    # NOL - handle alias urls
+    if AppConfig.environment[Rails.env]['alias_url']
+      temp_url = AppConfig.environment[Rails.env]['alias_url']
+    else
+      temp_url = AppConfig.environment.url
+    end    
+  
     receiving_services = Service.titles(@services)
     user.dispatch_post(@status_message,
-                       url:           short_post_url(@status_message.guid, host: AppConfig.environment.url),
+                       # NOL - handle alias urls
+                       #url:           short_post_url(@status_message.guid, host: AppConfig.environment.url),
+                       url:           short_post_url(@status_message.guid, host: temp_url),
                        service_types: receiving_services)
   end
 end

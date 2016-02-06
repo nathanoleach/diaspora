@@ -104,8 +104,9 @@ class Photo < ActiveRecord::Base
 
   def update_remote_path
     unless self.unprocessed_image.url.match(/^https?:\/\//)
-      #remote_path = "#{AppConfig.pod_uri.to_s.chomp("/")}#{self.unprocessed_image.url}"
-      remote_path = "#{"https://diaspora.ritfu.com/"}#{self.unprocessed_image.url}"
+      # NOL - no longer needed due to alias url handling
+      remote_path = "#{AppConfig.pod_uri.to_s.chomp("/")}#{self.unprocessed_image.url}"
+      #remote_path = "#{"https://diaspora.ritfu.com/"}#{self.unprocessed_image.url}"
     else
       remote_path = self.unprocessed_image.url
     end
